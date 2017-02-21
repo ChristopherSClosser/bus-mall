@@ -2,8 +2,13 @@
 html{
   text-align: center;
 }
-img {
+li{
+  list-style-type: none;
+}
+li img {
   margin: auto;
   width: 28%;
   padding: 1%;
+  float: left;
+  margin-left: 2%;
 }

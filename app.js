@@ -164,9 +164,9 @@ var clickCounter = -1;
 var randNum1 = 0;
 var randNum2 = 0;
 var randNum3 = 0;
-var i = 0;
-var j = 0;
-var k = 0;
+var first = 0;
+var second = 0;
+var third = 0;
 
  //constructor
 function addItem(imgName,idNumber) {
@@ -195,6 +195,7 @@ startButton.addEventListener('click', start);
 
 //random number
 function getRandNum(min, max) {
+
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -206,53 +207,53 @@ for(var i = 0; i < imageNameArray.length; i++) {
 
 //get three random non matching numbers
 function threeNonMatching(){
-  i = getRandNum(0,(itemObjects.length - 1));
-  while (i === randNum1 || i === randNum2 || i === randNum3) {
-    i = getRandNum(0,(itemObjects.length - 1));
+  first = getRandNum(0,(itemObjects.length - 1));
+  while (first === randNum1 || first === randNum2 || first === randNum3) {
+    first = getRandNum(0,(itemObjects.length - 1));
   }
-  j = getRandNum(0,(itemObjects.length - 1));
-  while(i === j || j === randNum1 || j === randNum2 || j === randNum3) {
-    j = getRandNum(0,(itemObjects.length - 1));
+  second = getRandNum(0,(itemObjects.length - 1));
+  while(first === second || second === randNum1 || second === randNum2 || second === randNum3) {
+    second = getRandNum(0,(itemObjects.length - 1));
   }
-  k = getRandNum(0,(itemObjects.length - 1));
-  while(k === j || k === i || k === randNum1 || k === randNum2 || k === randNum3) {
-    k = getRandNum(0,(itemObjects.length - 1));
+  third = getRandNum(0,(itemObjects.length - 1));
+  while(third === second || third === first || third === randNum1 || third === randNum2 || third === randNum3) {
+    third = getRandNum(0,(itemObjects.length - 1));
   }
-  randNum1 = i;
-  randNum2 = j;
-  randNum3 = k;
+  randNum1 = first;
+  randNum2 = second;
+  randNum3 = third;
 }
 
 //show three new items
 function genNewItems() {
   threeNonMatching();
-  var ulEl = document.getElementById('itemSpace');
+  var divEl = document.getElementById('itemSpace');
   var liEl = document.createElement('li');
   liEl.id = 'firstPhotoLi';
   var imgEl = document.createElement('img');
-  imgEl.setAttribute('src', itemObjects[i].filePath);
+  imgEl.setAttribute('src', itemObjects[first].filePath);
   imgEl.id = 'firstPhotoImg';
-  itemObjects[i].timesViewed++;
+  itemObjects[first].timesViewed++;
   liEl.appendChild(imgEl);
-  ulEl.appendChild(liEl);
+  divEl.appendChild(liEl);
 
   var liEl = document.createElement('li');
   liEl.id = 'secondPhotoLi';
   var imgEl = document.createElement('img');
-  imgEl.setAttribute('src', itemObjects[j].filePath);
+  imgEl.setAttribute('src', itemObjects[second].filePath);
   imgEl.id = 'secondPhotoImg';
-  itemObjects[j].timesViewed++;
+  itemObjects[second].timesViewed++;
   liEl.appendChild(imgEl);
-  ulEl.appendChild(liEl);
+  divEl.appendChild(liEl);
 
   var liEl = document.createElement('li');
   liEl.id = 'thridPhotoLi';
   var imgEl = document.createElement('img');
-  imgEl.setAttribute('src', itemObjects[k].filePath);
+  imgEl.setAttribute('src', itemObjects[third].filePath);
   imgEl.id = 'thirdPhotoImg';
-  itemObjects[k].timesViewed++;
+  itemObjects[third].timesViewed++;
   liEl.appendChild(imgEl);
-  ulEl.appendChild(liEl);
+  divEl.appendChild(liEl);
 
   clickCounter ++;
   var clickCounterEl = document.getElementById('runningTotal');
@@ -261,7 +262,7 @@ function genNewItems() {
     itemSpace.removeEventListener('click', showMorePhotos);
 
     var tbEl = document.getElementById('tableResults');
-    ulEl.className = 'hidden';
+    divEl.className = 'hidden';
     var trEl = document.createElement('tr');
     var thEl = document.createElement('th');
     thEl.textContent = 'Image Name';
@@ -299,21 +300,21 @@ function genNewItems() {
 //checking items to show new ones
 function checkPhoto(arrayObj) {
   arrayObj.timesClicked++;
-  var ulEl = document.getElementById('itemSpace');
-  ulEl.innerHTML = '';
+  var divEl = document.getElementById('itemSpace');
+  divEl.innerHTML = '';
   genNewItems();
 };
 
 //show three new items
 function showMorePhotos(event) {
   if (event.target.id === 'firstPhotoImg') {
-    checkPhoto(itemObjects[i]);
+    checkPhoto(itemObjects[first]);
   }
   if (event.target.id === 'secondPhotoImg') {
-    checkPhoto(itemObjects[j]);
+    checkPhoto(itemObjects[second]);
   }
   if (event.target.id === 'thirdPhotoImg') {
-    checkPhoto(itemObjects[k]);
+    checkPhoto(itemObjects[third]);
   }
 };
 
