@@ -1,1 +1,9 @@
 /*---------------css----------------*/
+html{
+  text-align: center;
+}
+img {
+  margin: auto;
+  width: 28%;
+  padding: 1%;
+}
