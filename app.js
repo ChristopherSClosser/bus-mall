@@ -228,32 +228,32 @@ function threeNonMatching(){
 function genNewItems() {
   threeNonMatching();
   var divEl = document.getElementById('itemSpace');
-  var liEl = document.createElement('li');
-  liEl.id = 'firstPhotoLi';
+  // var liEl = document.createElement('li');
+  // liEl.id = 'firstPhotoLi';
   var imgEl = document.createElement('img');
   imgEl.setAttribute('src', itemObjects[first].filePath);
-  imgEl.id = 'firstPhotoImg';
+  imgEl.id = 'firstItemImg';
   itemObjects[first].timesViewed++;
-  liEl.appendChild(imgEl);
-  divEl.appendChild(liEl);
+  divEl.appendChild(imgEl);
+  //divEl.appendChild(liEl);
 
-  var liEl = document.createElement('li');
-  liEl.id = 'secondPhotoLi';
+  // var liEl = document.createElement('li');
+  // liEl.id = 'secondPhotoLi';
   var imgEl = document.createElement('img');
   imgEl.setAttribute('src', itemObjects[second].filePath);
-  imgEl.id = 'secondPhotoImg';
+  imgEl.id = 'secondItemImg';
   itemObjects[second].timesViewed++;
-  liEl.appendChild(imgEl);
-  divEl.appendChild(liEl);
+  divEl.appendChild(imgEl);
+  //divEl.appendChild(liEl);
 
-  var liEl = document.createElement('li');
-  liEl.id = 'thridPhotoLi';
+  // var liEl = document.createElement('li');
+  // liEl.id = 'thridPhotoLi';
   var imgEl = document.createElement('img');
   imgEl.setAttribute('src', itemObjects[third].filePath);
-  imgEl.id = 'thirdPhotoImg';
+  imgEl.id = 'thirdItemImg';
   itemObjects[third].timesViewed++;
-  liEl.appendChild(imgEl);
-  divEl.appendChild(liEl);
+  divEl.appendChild(imgEl);
+  //divEl.appendChild(liEl);
 
   clickCounter ++;
   var clickCounterEl = document.getElementById('runningTotal');
@@ -307,13 +307,13 @@ function checkPhoto(arrayObj) {
 
 //show three new items
 function showMorePhotos(event) {
-  if (event.target.id === 'firstPhotoImg') {
+  if (event.target.id === 'firstItemImg') {
     checkPhoto(itemObjects[first]);
   }
-  if (event.target.id === 'secondPhotoImg') {
+  if (event.target.id === 'secondItemImg') {
     checkPhoto(itemObjects[second]);
   }
-  if (event.target.id === 'thirdPhotoImg') {
+  if (event.target.id === 'thirdItemImg') {
     checkPhoto(itemObjects[third]);
   }
 };
