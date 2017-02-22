@@ -48,3 +48,7 @@ td{
 #startButton {
   margin: 3%
 }
+#intro{
+  margin: auto;
+  width: 66%;
+}

@@ -158,7 +158,7 @@
 
 //variables
 var imageNameArray = ['bag','banana','bathroom','boots','breakfast','bubblegum', 'chair','cthulhu','dogDuck','dragon','pen','petSweep','scissors','shark','sweep','tauntaun','unicorn','usb','waterCan','wineGlass'];
-
+var chances = 24;
 var itemObjects = [];
 var clickCounter = -1;
 var randNum1 = 0;
@@ -258,7 +258,9 @@ function genNewItems() {
   clickCounter ++;
   var clickCounterEl = document.getElementById('runningTotal');
   clickCounterEl.textContent = clickCounter;
-  if(clickCounter > 24) {
+  var labelName = [];
+  var data = [];
+  if(clickCounter > chances) {
     itemSpace.removeEventListener('click', showMorePhotos);
 
     var tbEl = document.getElementById('tableResults');
@@ -281,7 +283,9 @@ function genNewItems() {
     for(var p = 0; p < itemObjects.length; p++){
       var trEl = document.createElement('tr');
       var tdEl = document.createElement('td');
+      data.push(itemObjects[p].timesViewed);
       tdEl.textContent = itemObjects[p].imgName;
+      labelName.push(itemObjects[p].imgName);
       trEl.appendChild(tdEl);
       var tdEl = document.createElement('td');
       tdEl.textContent = itemObjects[p].timesViewed;
@@ -295,6 +299,35 @@ function genNewItems() {
       tbEl.appendChild(trEl);
     }
   }
+  //chart
+  var context = document.getElementById('chart').getContext('2d');
+
+  var labelColors = ['blue', 'red', 'orange', 'indigo', 'yellow', 'green', 'salmon'];
+
+  var chartData = {
+    type: 'line',
+    data: {
+      labels: labelName,
+      datasets: [{
+        label: 'Items Selected',
+        data: data,
+        backgroundColor: labelColors
+      }],
+    },
+
+    options: {
+      scales: {
+        yAxes:[{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+
+  };
+  var myChart = new Chart(context, chartData);
+
 }
 
 //checking items to show new ones
@@ -320,6 +353,9 @@ function showMorePhotos(event) {
 
 //waiting untill click on item
 itemSpace.addEventListener('click', showMorePhotos);
+
+//chartData.options.scales.yAxes[0].ticks.beginAtZero = true;
+
 //product constructor
   //% of times item was clicked when shown
     //number times shown
