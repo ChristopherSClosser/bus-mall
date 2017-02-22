@@ -1,163 +1,7 @@
 'use strict';
-//
-//
-//
-// var toalItems = [];
-//
-// // function constructItem(){
-// //   for (var i = 0; i < allItems.length; i++) {
-// //     this.name = allItems[i];
-// //   }
-// // }
-// var bag = new ItemObject('assets/bag.jpg', 0, 0);
-// var bannana = new ItemObject('assets/bannana.jpg', 0, 0);
-// var bathroom = new ItemObject('assets/bathroom.jpg', 0, 0);
-// var boots = new ItemObject('assets/boots.jpg', 0, 0);
-// var breakfast = new ItemObject('assets/breakfast.jpg', 0, 0);
-// var bubbleGum = new ItemObject('assets/bubbleGum.jpg', 0, 0);
-// var chair = new ItemObject('assets/chair.jpg', 0, 0);
-// var cthulhu = new ItemObject('assets/cthulhu.jpg', 0, 0);
-// var dogDuck = new ItemObject('assets/dog-duck.jpg', 0, 0);
-// var dragon = new ItemObject('assets/dragon.jpg', 0, 0);
-// var pen = new ItemObject('assets/pen.jpg', 0, 0);
-// var petSweep = new ItemObject('assets/pet-sweep.jpg', 0, 0);
-// var scissors = new ItemObject('assets/scissors.jpg', 0, 0);
-// var shark = new ItemObject('assets/shark.jpg', 0, 0);
-// var sweep = new ItemObject('assets/sweep.jpg', 0, 0);
-// var tauntaun = new ItemObject('assets/tauntaun.jpg', 0, 0);
-// var unicorn = new ItemObject('assets/unicorn.jpg', 0, 0);
-// var usb = new ItemObject('assets/usb.jpg', 0, 0);
-// var waterCan = new ItemObject('assets/water-can.jpg', 0, 0);
-// var wineGlass = new ItemObject('assets/wine-glass.jpg', 0, 0);
-//
-// var allItems = [bag, bannana, bathroom, boots, breakfast, bubbleGum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
-//
-// var imgEl = document.getElementsByClassName('items');
-// var itemOneEl = document.createElement('img');
-// var itemTwo = document.createElement('img');
-// var itemThree = document.createElement('img');
-//
-// function ItemObject(fileName, displayed, clicked) {
-//   this.fileName = fileName;
-//   this.displayed = displayed;
-//   this.clicked = clicked;
-//   this.justDisplayed = 0;
-//   //add arrays?
-// }
-//
-// ItemObject.prototype.usrClicked = function(){
-//   this.clicked += clicked;
-// };
-//
-// ItemObject.prototype.usrViewed = function(){
-//   this.displayed += displayed;
-// };
-//
-// itemOneEl.getE('src', 'assets/bag.jpg');
-// imgEl.appendChild(itemOneEl);
-// console.log('itemOneEl' + imgEl);
-
-// function showItems(){
-//   var numItemsToShow = 3;
-//
-//   for (var i = 0; i <= numItemsToShow; i++) {
-//   //   for (var ii = 0; ii < allItems.length; ii++) {
-//   //     if(allItems.)
-//   //   }
-//     console.log('the item is' + this.fileName[i]);
-//     itemOneEl.texContent = this.fileName[i];
-//     imgEl.appendChild(itemOneEl);
-//   }
-// }
-// variables
-// var itemsToShow = 3;
-// var totalClicks = 0;
-// var clickLimit = 25;
-// // arrays
-// var justDisplayed = [];
-// var count = [];
-// var allItems = [];
-//
-// var pics = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif', 'water-can.jpg', 'wine-glass.jpg'];
-//
-// // functions
-// function randNum(){
-//   return (1 + Math.floor(Math.random() * pics.length));
-// }
-//
-// function threeNonMatching(){
-//   var left = randNum();
-//   var center = randNum();
-//   var right = randNum();
-//
-//   while (justDisplayed.includes(left)) {
-//     left = randNum();
-//   }
-//   while (center === left || justDisplayed.includes(center)) {
-//     center = randNum();
-//   }
-//   while (right === left || right === center || justDisplayed.includes(right)) {
-//     right = randNum();
-//   }
-// }
-//
-// function showItems() {
-//   for (var i = 0; i < itemsToShow; i++) {
-//     pics[i] = (1 + Math.floor(Math.random() * pics.length));
-//     //while second and third random numbers do not match
-//     for (var j = 0; j < justDisplayed.length; j++) {
-//       if (pics[i] === justDisplayed[j]) {
-//         console.log('pics = justDisplayed');
-//         showItems();
-//       }// for (var ii = 0; ii < itemsToShow; ii++) {
-//
-//     }
-//     //   console.log(pics[i]);
-//     // }
-//     console.log('count is ' + pics[i]);
-//
-//     //console.log('pics is ' + pics);
-//   };
-//   // for (var i = 0; i < count.length; i++) {
-//   //   console.log(pics.count[i]);
-//   // }
-//   displayItems();
-// };
-// // for (var i = 0; i < pics.length; i++) {
-// //   allItems.push(new addItem(pics[i]));
-// //   console.log(allItems);
-// // }
-//
-// // creates images for display function
-// function addItem(id, src) {
-//   var img = document.createElement('img');
-//   img.id = id;
-//   img.src = src;
-//   img.views = 0;
-//   img.clicks = 0;
-//   // img.class = 'items-show';
-//
-//   //img.onmouseup = keepItem;
-//   document.getElementById('item').appendChild(img);
-//   console.log(img);
-//
-// };
-//
-// function displayItems() {
-//   for (var i = 0; i < itemsToShow; i++) {
-//     if(justDisplayed[i] !== pics[i]){
-//       addItem(i + 1, 'assets/' + pics[i] + '.jpg');
-//       justDisplayed.push(pics[i]);
-//       console.log('justDisplayed' + justDisplayed);
-//     } else {
-//       showItems();
-//     }
-//   }
-//   justDisplayed = [];
-// }
 
 //variables
-var imageNameArray = ['bag','banana','bathroom','boots','breakfast','bubblegum', 'chair','cthulhu','dogDuck','dragon','pen','petSweep','scissors','shark','sweep','tauntaun','unicorn','usb','waterCan','wineGlass'];
+var imageNameArray = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
 var chances = 24;
 var itemObjects = [];
 var clickCounter = -1;
@@ -179,13 +23,27 @@ function addItem(imgName,idNumber) {
   itemObjects.push(this);
 }
 
+//after click hide the button
+// function block_none(){
+//   document.getElementById('startButton').classList.add('show');
+//   document.getElementById('startButton').classList.add('hide');
+// }
+
 //start clicking
 function start() {
+
+  // var button = document.getElementById('startButton');
+  // button.addEventListener('click',hideshow,false);
+  // function hideshow() {
+  //   document.getElementById('startButton').style.display = 'block';
+  //   this.style.display = 'none';
+  // }
   startButton.className = 'hidden';
-  var intro = document.getElementById('intro');
+  //var intro = document.getElementById('intro');
   intro.className = 'hidden';
   var runningCounter = document.getElementById('runningCounter');
   runningCounter.className = 'active';
+
   return genNewItems();
 }
 
@@ -258,6 +116,7 @@ function genNewItems() {
   clickCounter ++;
   var clickCounterEl = document.getElementById('runningTotal');
   clickCounterEl.textContent = clickCounter;
+
   var labelName = [];
   var data = [];
   if(clickCounter > chances) {
@@ -280,53 +139,53 @@ function genNewItems() {
     trEl.appendChild(thEl);
     tbEl.appendChild(trEl);
 
-    for(var p = 0; p < itemObjects.length; p++){
+    for(var ii = 0; ii < itemObjects.length; ii++){
       var trEl = document.createElement('tr');
       var tdEl = document.createElement('td');
-      data.push(itemObjects[p].timesViewed);
-      tdEl.textContent = itemObjects[p].imgName;
-      labelName.push(itemObjects[p].imgName);
+      data.push(itemObjects[ii].timesClicked);
+      tdEl.textContent = itemObjects[ii].imgName;
+      labelName.push(itemObjects[ii].imgName);
       trEl.appendChild(tdEl);
       var tdEl = document.createElement('td');
-      tdEl.textContent = itemObjects[p].timesViewed;
+      tdEl.textContent = itemObjects[ii].timesViewed;
       trEl.appendChild(tdEl);
       var tdEl = document.createElement('td');
-      tdEl.textContent = itemObjects[p].timesClicked;
+      tdEl.textContent = itemObjects[ii].timesClicked;
       trEl.appendChild(tdEl);
       var tdEl = document.createElement('td');
-      tdEl.textContent = Math.floor(((itemObjects[p].timesClicked / itemObjects[p].timesViewed) * 100)) + '%';
+      var perc = Math.floor(((itemObjects[ii].timesClicked / itemObjects[ii].timesViewed) * 100)) + '%';
+      tdEl.textContent = perc;
       trEl.appendChild(tdEl);
       tbEl.appendChild(trEl);
     }
-  }
-  //chart
-  var context = document.getElementById('chart').getContext('2d');
+    //chart
+    var context = document.getElementById('chart').getContext('2d');
 
-  var labelColors = ['blue', 'red', 'orange', 'indigo', 'yellow', 'green', 'salmon'];
+    var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'green', 'salmon', 'tan', 'blue', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'green', 'salmon'];
 
-  var chartData = {
-    type: 'line',
-    data: {
-      labels: labelName,
-      datasets: [{
-        label: 'Items Selected',
-        data: data,
-        backgroundColor: labelColors
-      }],
-    },
+    var chartData = {
+      type: 'bar',
+      data: {
+        labels: labelName,
+        datasets: [{
+          label: 'Items Selected',
+          data: data,
+          backgroundColor: labelColors
+        }],
+      },
 
-    options: {
-      scales: {
-        yAxes:[{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
+      options: {
+        scales: {
+          yAxes:[{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
       }
-    }
-
-  };
-  var myChart = new Chart(context, chartData);
+    };
+    var myChart = new Chart(context, chartData);
+  }
 
 }
 

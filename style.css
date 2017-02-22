@@ -6,10 +6,9 @@ html{
 
 img {
   margin: auto;
-  width: 28%;
-  padding: 1%;
-  float: left;
+  width: 25%;
   margin-left: 2%;
+  max-height: 260px;
 }
 table {
   border-spacing: 0px;
@@ -51,4 +50,10 @@ td{
 #intro{
   margin: auto;
   width: 66%;
+}
+.hidden{
+  display: none;
+}
+#itemSpace{
+  margin-top: 15%;
 }
