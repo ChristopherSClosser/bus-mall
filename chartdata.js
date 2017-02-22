@@ -26,24 +26,41 @@ function itemObjectsNames(items){
 
 function itemObjectsViewed(items){
   var itemViewed = [];
+  for (var i = 0; i < items.length; i++) {
+    itemViewed.push(items[i].timesViewed);
+  }
+  console.log('times item was viewed ' + itemViewed);
+  return itemViewed;
 }
 
 function itemObjectsPerc(items){
-  var itemPrec = [];
+  var itemPerc = [];
+  for (var i = 0; i < items.length; i++) {
+    itemPerc.push(items[i].perc);
+  }
+  console.log('percentage clicked ' + itemPerc);
+  return itemPerc;
 }
 
+var viewedData = itemObjectsViewed(itemObjects);
 var clickData = itemObjectsClicks(itemObjects);
 var nameData = itemObjectsNames(itemObjects);
+var percData = itemObjectsPerc(itemObjects);
+console.log(percData);
 var data = [13,2,90,67,4,34,1,0,56,45,72,98,29,57,83,8, 87, 59, 93, 55];
 var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'darkolivegreen', 'goldenrod', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'olivedrab', 'red', 'orange', 'indigo', 'yellow', 'chocolate', 'crimson', 'brown',];
 
 var chartData = {
-  type: 'horizontalBar',
+  type: 'bar',
   data: {
     labels: nameData,
     datasets: [{
       label: 'Items Selected',
       data: clickData,
+      backgroundColor: labelColors
+    },{
+      label: 'Items Viewed',
+      data: viewedData,
       backgroundColor: labelColors
     }],
   },
@@ -68,10 +85,10 @@ var context = document.getElementById('mostPicked').getContext('2d');
 var chartDataTwo = {
   type: 'polarArea',
   data: {
-    labels: labelColors,
+    labels: nameData,
     datasets: [{
       label: 'Most Selected',
-      data: data,
+      data: percData,
       backgroundColor: labelColors
     }],
   },

@@ -110,11 +110,11 @@ function genNewItems() {
   var clickCounterEl = document.getElementById('runningTotal');
   clickCounterEl.textContent = clickCounter;
 
-//variables for charts
-  var labelNameChartOne = [];
-  var dataChartOne = [];
-  var labelNameChartTwo = [];
-  var dataChartTwo = [];
+// //variables for charts
+//   var labelNameChartOne = [];
+//   var dataChartOne = [];
+//   var labelNameChartTwo = [];
+//   var dataChartTwo = [];
 
   if(clickCounter > chances) {
     itemSpace.removeEventListener('click', showMorePhotos);
@@ -142,10 +142,10 @@ function genNewItems() {
       var trEl = document.createElement('tr');
       var tdEl = document.createElement('td');
 
-      dataChartOne.push(itemObjects[ii].timesClicked);
+      //dataChartOne.push(itemObjects[ii].timesClicked);
       tdEl.textContent = itemObjects[ii].imgName;
-      labelNameChartOne.push(itemObjects[ii].imgName);
-      labelNameChartTwo.push(itemObjects[ii].imgName);
+      //labelNameChartOne.push(itemObjects[ii].imgName);
+      //labelNameChartTwo.push(itemObjects[ii].imgName);
       trEl.appendChild(tdEl);
 
       var tdEl = document.createElement('td');
@@ -157,77 +157,77 @@ function genNewItems() {
       trEl.appendChild(tdEl);
 
       var tdEl = document.createElement('td');
-      var perc = Math.floor(((itemObjects[ii].timesClicked / itemObjects[ii].timesViewed) * 100));
+      itemObjects[ii].perc = Math.floor(((itemObjects[ii].timesClicked / itemObjects[ii].timesViewed) * 100));
 
-      tdEl.textContent = perc;
-      dataChartTwo.push(perc);
+      tdEl.textContent = itemObjects[ii].perc;
+      //dataChartTwo.push(perc);
       trEl.appendChild(tdEl);
       tbEl.appendChild(trEl);
 
-      console.log(dataChartTwo);
+      // console.log(dataChartTwo);
     }
-
-    //charts
-    var context = document.getElementById('itemsPicked').getContext('2d');
-
-    var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'darkolivegreen', 'Beige ', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'teal', 'red', 'orange', 'indigo', 'yellow', 'chocolate', 'crimson', 'brown',];
-
-    var chartData = {
-      type: 'bar',
-      data: {
-        labels: labelNameChartOne,
-        datasets: [{
-          label: 'Items Selected',
-          data: dataChartOne,
-          backgroundColor: labelColors
-        }],
-      },
-
-      options: {
-        scales: {
-          yAxes:[{
-            ticks: {
-              beginAtZero: true,
-              maintainAspectRatio: false,
-            }
-          }]
-        }
-      }
-    };
-
-    var myChart = new Chart(context, chartData);
-    document.getElementById('chartOne', 'chartTwo');
-    chartOne.className = 'show';
-    chartTwo.className = 'show';
-
-    //chart 2
-    var context = document.getElementById('mostPicked').getContext('2d');
-
-    var chartDataTwo = {
-      type: 'polarArea',
-      data: {
-        labels: labelNameChartTwo,
-        datasets: [{
-          label: 'Most Selected',
-          data: dataChartTwo,
-          backgroundColor: labelColors
-        }],
-      },
-
-      options: {
-        scales: {
-          yAxes:[{
-            ticks: {
-              beginAtZero: true,
-              maintainAspectRatio: false,
-            }
-          }]
-        }
-      }
-    };
-
-    //chartData.options.scales.yAxes[0].ticks.beginAtZero = true;
-    var myChartTwo = new Chart(context, chartDataTwo);
+    seecharts.className = '';
+    // //charts
+    // var context = document.getElementById('itemsPicked').getContext('2d');
+    //
+    // var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'darkolivegreen', 'Beige ', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'teal', 'red', 'orange', 'indigo', 'yellow', 'chocolate', 'crimson', 'brown',];
+    //
+    // var chartData = {
+    //   type: 'bar',
+    //   data: {
+    //     labels: labelNameChartOne,
+    //     datasets: [{
+    //       label: 'Items Selected',
+    //       data: dataChartOne,
+    //       backgroundColor: labelColors
+    //     }],
+    //   },
+    //
+    //   options: {
+    //     scales: {
+    //       yAxes:[{
+    //         ticks: {
+    //           beginAtZero: true,
+    //           maintainAspectRatio: false,
+    //         }
+    //       }]
+    //     }
+    //   }
+    // };
+    //
+    // var myChart = new Chart(context, chartData);
+    // document.getElementById('chartOne', 'chartTwo');
+    // chartOne.className = 'show';
+    // chartTwo.className = 'show';
+    //
+    // //chart 2
+    // var context = document.getElementById('mostPicked').getContext('2d');
+    //
+    // var chartDataTwo = {
+    //   type: 'polarArea',
+    //   data: {
+    //     labels: labelNameChartTwo,
+    //     datasets: [{
+    //       label: 'Most Selected',
+    //       data: dataChartTwo,
+    //       backgroundColor: labelColors
+    //     }],
+    //   },
+    //
+    //   options: {
+    //     scales: {
+    //       yAxes:[{
+    //         ticks: {
+    //           beginAtZero: true,
+    //           maintainAspectRatio: false,
+    //         }
+    //       }]
+    //     }
+    //   }
+    // };
+    //
+    // //chartData.options.scales.yAxes[0].ticks.beginAtZero = true;
+    // var myChartTwo = new Chart(context, chartDataTwo);
     saveToLocalStorage(itemObjects);
   }
 }
