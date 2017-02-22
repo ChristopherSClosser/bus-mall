@@ -61,3 +61,23 @@ td{
   width: 60%;
   margin: auto;
 }
+.button {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    width: 130px;
+    height: 45px;
+    font-size: larger;
+    background-color: white;
+    border-style: outset;
+    border-width: thick;
+    outline: none;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: darkgrey;
+    color: white;
+}
+.button:active{
+  border-style: inset;
+}
