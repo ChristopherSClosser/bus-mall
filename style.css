@@ -8,7 +8,7 @@ img {
   margin: auto;
   width: 25%;
   margin-left: 2%;
-  max-height: 260px;
+
 }
 table {
   border-spacing: 0px;
@@ -55,5 +55,9 @@ td{
   display: none;
 }
 #itemSpace{
-  margin-top: 15%;
+  margin-top: 8%;
+}
+.results{
+  width: 60%;
+  margin: auto;
 }

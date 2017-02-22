@@ -11,7 +11,7 @@ var randNum3 = 0;
 var first = 0;
 var second = 0;
 var third = 0;
-
+var perc = [];
  //constructor
 function addItem(imgName,idNumber) {
   this.imgName = imgName;
@@ -20,7 +20,9 @@ function addItem(imgName,idNumber) {
   this.imgHTMLtag = '<img src="img/' + imgName + '.jpg">';
   this.timesClicked = 0;
   this.timesViewed = 0;
+  this.perc = perc;
   itemObjects.push(this);
+
 }
 
 //after click hide the button
@@ -116,9 +118,12 @@ function genNewItems() {
   clickCounter ++;
   var clickCounterEl = document.getElementById('runningTotal');
   clickCounterEl.textContent = clickCounter;
+//variables for charts
+  var labelNameChartOne = [];
+  var dataChartOne = [];
+  var labelNameChartTwo = [];
+  var dataChartTwo = [];
 
-  var labelName = [];
-  var data = [];
   if(clickCounter > chances) {
     itemSpace.removeEventListener('click', showMorePhotos);
 
@@ -142,9 +147,11 @@ function genNewItems() {
     for(var ii = 0; ii < itemObjects.length; ii++){
       var trEl = document.createElement('tr');
       var tdEl = document.createElement('td');
-      data.push(itemObjects[ii].timesClicked);
+      dataChartOne.push(itemObjects[ii].timesClicked);
+
       tdEl.textContent = itemObjects[ii].imgName;
-      labelName.push(itemObjects[ii].imgName);
+      labelNameChartOne.push(itemObjects[ii].imgName);
+      labelNameChartTwo.push(itemObjects[ii].imgName);
       trEl.appendChild(tdEl);
       var tdEl = document.createElement('td');
       tdEl.textContent = itemObjects[ii].timesViewed;
@@ -153,23 +160,26 @@ function genNewItems() {
       tdEl.textContent = itemObjects[ii].timesClicked;
       trEl.appendChild(tdEl);
       var tdEl = document.createElement('td');
-      var perc = Math.floor(((itemObjects[ii].timesClicked / itemObjects[ii].timesViewed) * 100)) + '%';
+      var perc = Math.floor(((itemObjects[ii].timesClicked / itemObjects[ii].timesViewed) * 100));
       tdEl.textContent = perc;
+      dataChartTwo.push(perc);
       trEl.appendChild(tdEl);
       tbEl.appendChild(trEl);
+
+      console.log(dataChartTwo);
     }
     //chart
-    var context = document.getElementById('chart').getContext('2d');
+    var context = document.getElementById('itemsPicked').getContext('2d');
 
-    var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'green', 'salmon', 'tan', 'blue', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'green', 'salmon'];
+    var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'Artichoke', 'Amaranth Pink'];
 
     var chartData = {
       type: 'bar',
       data: {
-        labels: labelName,
+        labels: labelNameChartOne,
         datasets: [{
           label: 'Items Selected',
-          data: data,
+          data: dataChartOne,
           backgroundColor: labelColors
         }],
       },
@@ -178,15 +188,45 @@ function genNewItems() {
         scales: {
           yAxes:[{
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              maintainAspectRatio: false,
             }
           }]
         }
       }
     };
     var myChart = new Chart(context, chartData);
-  }
 
+    //chart 2
+    var context = document.getElementById('mostPicked').getContext('2d');
+
+    var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'Artichoke', 'Amaranth Pink'];
+
+    var chartDataTwo = {
+      type: 'polarArea',
+      data: {
+        labels: labelNameChartTwo,
+        datasets: [{
+          label: 'Most Selected',
+          data: dataChartTwo,
+          backgroundColor: labelColors
+        }],
+      },
+
+      options: {
+        scales: {
+          yAxes:[{
+            ticks: {
+              beginAtZero: true,
+              maintainAspectRatio: false,
+            }
+          }]
+        }
+      }
+    };
+    var myChartTwo = new Chart(context, chartDataTwo);
+
+  }
 }
 
 //checking items to show new ones

@@ -9,9 +9,9 @@
       <section>
         <div id=intro>
           <h3>Thank You For Helping Us Gather Some Data:</h3>
-          <p> You will be shown a group of 3 items, please click on your favorite item among these. Your choice should be made quickly. After completing twenty-five times, you will see your stats! <br><br> Click begin to start!</p>
+          <p> You will be shown a group of 3 items, please click on your favorite item among these. <br>Your choice should be made quickly. After completing twenty-five times, you will see your stats! <br><br> Click begin to start!</p>
         </div>
-        <button onclick="block_none()" id="startButton">Begin</button>
+        <button id="startButton">Begin</button>
       </section>
       <section>
         <div class="hidden" id="runningCounter">
@@ -20,8 +20,9 @@
         </div>
         <div id="itemSpace"></div>
       </section>
-      <section>
-        <canvas id="chart"></canvas>
+      <section class="results">
+        <canvas id="itemsPicked"></canvas>
+        <canvas id="mostPicked"></canvas>
         <table id="tableResults">
         </table>
       </section>
