@@ -25,12 +25,6 @@ function addItem(imgName,idNumber) {
 
 }
 
-//after click hide the button
-// function block_none(){
-//   document.getElementById('startButton').classList.add('show');
-//   document.getElementById('startButton').classList.add('hide');
-// }
-
 //start clicking
 function start() {
 
@@ -86,38 +80,36 @@ function threeNonMatching(){
 
 //show three new items
 function genNewItems() {
+
+  //get three unique numbers
   threeNonMatching();
+
+  //select div to place items
   var divEl = document.getElementById('itemSpace');
-  // var liEl = document.createElement('li');
-  // liEl.id = 'firstPhotoLi';
+
+//creat img tags
   var imgEl = document.createElement('img');
   imgEl.setAttribute('src', itemObjects[first].filePath);
   imgEl.id = 'firstItemImg';
   itemObjects[first].timesViewed++;
   divEl.appendChild(imgEl);
-  //divEl.appendChild(liEl);
 
-  // var liEl = document.createElement('li');
-  // liEl.id = 'secondPhotoLi';
   var imgEl = document.createElement('img');
   imgEl.setAttribute('src', itemObjects[second].filePath);
   imgEl.id = 'secondItemImg';
   itemObjects[second].timesViewed++;
   divEl.appendChild(imgEl);
-  //divEl.appendChild(liEl);
 
-  // var liEl = document.createElement('li');
-  // liEl.id = 'thridPhotoLi';
   var imgEl = document.createElement('img');
   imgEl.setAttribute('src', itemObjects[third].filePath);
   imgEl.id = 'thirdItemImg';
   itemObjects[third].timesViewed++;
   divEl.appendChild(imgEl);
-  //divEl.appendChild(liEl);
 
   clickCounter ++;
   var clickCounterEl = document.getElementById('runningTotal');
   clickCounterEl.textContent = clickCounter;
+
 //variables for charts
   var labelNameChartOne = [];
   var dataChartOne = [];
@@ -133,12 +125,14 @@ function genNewItems() {
     var thEl = document.createElement('th');
     thEl.textContent = 'Image Name';
     trEl.appendChild(thEl);
+
     var thEl = document.createElement('th');
     thEl.textContent = 'Times Viewed';
     trEl.appendChild(thEl);
     var thEl = document.createElement('th');
     thEl.textContent = 'Times Clicked';
     trEl.appendChild(thEl);
+
     var thEl = document.createElement('th');
     thEl.textContent = 'Click Thru Rate';
     trEl.appendChild(thEl);
@@ -147,20 +141,24 @@ function genNewItems() {
     for(var ii = 0; ii < itemObjects.length; ii++){
       var trEl = document.createElement('tr');
       var tdEl = document.createElement('td');
-      dataChartOne.push(itemObjects[ii].timesClicked);
 
+      dataChartOne.push(itemObjects[ii].timesClicked);
       tdEl.textContent = itemObjects[ii].imgName;
       labelNameChartOne.push(itemObjects[ii].imgName);
       labelNameChartTwo.push(itemObjects[ii].imgName);
       trEl.appendChild(tdEl);
+
       var tdEl = document.createElement('td');
       tdEl.textContent = itemObjects[ii].timesViewed;
       trEl.appendChild(tdEl);
+
       var tdEl = document.createElement('td');
       tdEl.textContent = itemObjects[ii].timesClicked;
       trEl.appendChild(tdEl);
+
       var tdEl = document.createElement('td');
       var perc = Math.floor(((itemObjects[ii].timesClicked / itemObjects[ii].timesViewed) * 100));
+
       tdEl.textContent = perc;
       dataChartTwo.push(perc);
       trEl.appendChild(tdEl);
@@ -168,10 +166,11 @@ function genNewItems() {
 
       console.log(dataChartTwo);
     }
-    //chart
+
+    //charts
     var context = document.getElementById('itemsPicked').getContext('2d');
 
-    var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'Artichoke', 'Amaranth Pink'];
+    var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'darkolivegreen', 'Beige ', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'teal', 'red', 'orange', 'indigo', 'yellow', 'chocolate', 'crimson', 'brown',];
 
     var chartData = {
       type: 'bar',
@@ -195,12 +194,14 @@ function genNewItems() {
         }
       }
     };
+
     var myChart = new Chart(context, chartData);
+    document.getElementById('chartOne', 'chartTwo');
+    chartOne.className = 'show';
+    chartTwo.className = 'show';
 
     //chart 2
     var context = document.getElementById('mostPicked').getContext('2d');
-
-    var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'Artichoke', 'Amaranth Pink'];
 
     var chartDataTwo = {
       type: 'polarArea',
@@ -224,14 +225,17 @@ function genNewItems() {
         }
       }
     };
-    var myChartTwo = new Chart(context, chartDataTwo);
 
+    //chartData.options.scales.yAxes[0].ticks.beginAtZero = true;
+    var myChartTwo = new Chart(context, chartDataTwo);
+    saveToLocalStorage(itemObjects);
   }
 }
 
 //checking items to show new ones
 function checkPhoto(arrayObj) {
   arrayObj.timesClicked++;
+
   var divEl = document.getElementById('itemSpace');
   divEl.innerHTML = '';
   genNewItems();
@@ -250,10 +254,12 @@ function showMorePhotos(event) {
   }
 };
 
+function saveToLocalStorage(itemObjects){
+  localStorage.itemObjects = JSON.stringify(itemObjects);
+  console.log('Saved to localStorage');
+}
 //waiting untill click on item
 itemSpace.addEventListener('click', showMorePhotos);
-
-//chartData.options.scales.yAxes[0].ticks.beginAtZero = true;
 
 //product constructor
   //% of times item was clicked when shown
