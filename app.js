@@ -12,6 +12,11 @@ var first = 0;
 var second = 0;
 var third = 0;
 var perc = [];
+
+var retrievedObject = localStorage.getItem('itemObjects');
+//var stored = JSON.parse(retrievedObject);
+console.log('--------------objects retrieved------------------' + retrievedObject);
+
  //constructor
 function addItem(imgName,idNumber) {
   this.imgName = imgName;
@@ -27,7 +32,6 @@ function addItem(imgName,idNumber) {
 
 //start clicking
 function start() {
-
   // var button = document.getElementById('startButton');
   // button.addEventListener('click',hideshow,false);
   // function hideshow() {
@@ -54,10 +58,14 @@ function getRandNum(min, max) {
 }
 
 //creating item objects
+// if (localStorage.itemObjects){
+//   localStorage.itemObjects = JSON.parse(itemObjects);
+// }else{
 for(var i = 0; i < imageNameArray.length; i++) {
   var newImage = imageNameArray[i];
   newImage = new addItem(newImage,i);
 }
+//}
 
 //get three random non matching numbers
 function threeNonMatching(){
@@ -117,7 +125,7 @@ function genNewItems() {
 //   var dataChartTwo = [];
 
   if(clickCounter > chances) {
-    itemSpace.removeEventListener('click', showMorePhotos);
+    itemSpace.removeEventListener('click', showMoreItems);
 
     var tbEl = document.getElementById('tableResults');
     divEl.className = 'hidden';
@@ -228,12 +236,15 @@ function genNewItems() {
     //
     // //chartData.options.scales.yAxes[0].ticks.beginAtZero = true;
     // var myChartTwo = new Chart(context, chartDataTwo);
+    //localStorage.setItem('itemObjects', stored);
+    //localStorage.setItem('itemObjects', JSON.stringify(stored));
+    // var result = localStorage.getItem('itemObjects');
     saveToLocalStorage(itemObjects);
   }
 }
 
 //checking items to show new ones
-function checkPhoto(arrayObj) {
+function checkItem(arrayObj) {
   arrayObj.timesClicked++;
 
   var divEl = document.getElementById('itemSpace');
@@ -242,24 +253,29 @@ function checkPhoto(arrayObj) {
 };
 
 //show three new items
-function showMorePhotos(event) {
+function showMoreItems(event) {
   if (event.target.id === 'firstItemImg') {
-    checkPhoto(itemObjects[first]);
+    checkItem(itemObjects[first]);
   }
   if (event.target.id === 'secondItemImg') {
-    checkPhoto(itemObjects[second]);
+    checkItem(itemObjects[second]);
   }
   if (event.target.id === 'thirdItemImg') {
-    checkPhoto(itemObjects[third]);
+    checkItem(itemObjects[third]);
   }
 };
 
 function saveToLocalStorage(itemObjects){
+  //var retrievedObject = //localStorage.getItem('itemObjects');
+  //var stored = JSON.parse(retrievedObject);
+  //var stored = JSON.stringify(itemObjects);
+  localStorage.setItem('itemObjects', retrievedObject);
   localStorage.itemObjects = JSON.stringify(itemObjects);
+
   console.log('Saved to localStorage');
 }
 //waiting untill click on item
-itemSpace.addEventListener('click', showMorePhotos);
+itemSpace.addEventListener('click', showMoreItems);
 
 //product constructor
   //% of times item was clicked when shown
