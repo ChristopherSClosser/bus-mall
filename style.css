@@ -8,6 +8,7 @@ img {
   margin: auto;
   width: 25%;
   margin-left: 2%;
+  box-shadow: 0 0 8px 8px white inset;
 
 }
 table {
@@ -16,8 +17,9 @@ table {
   display: table;
   border-collapse: separate;
   border-color: #c1c1c1;
-  width: 74%;
+  width: 100%;
   margin: auto;
+  margin-top: 16%;
 }
 th {
   padding-top: 11px;
@@ -64,7 +66,7 @@ td{
 .button {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
-    width: 130px;
+    width: 169px;
     height: 45px;
     font-size: larger;
     background-color: white;
@@ -80,4 +82,17 @@ td{
 }
 .button:active{
   border-style: inset;
+}
+a{
+  color: darkgrey;
+  text-decoration: none;
+  font-size: 24px;
+}
+a:hover{
+  color: white;
+  font-weight: bold;
+}
+#seecharts:hover{
+  color: black;
+  font-weight: bold;
 }

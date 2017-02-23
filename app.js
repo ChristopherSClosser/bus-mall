@@ -12,6 +12,11 @@ var first = 0;
 var second = 0;
 var third = 0;
 var perc = [];
+
+var retrievedObject = localStorage.getItem('itemObjects');
+//var stored = JSON.parse(retrievedObject);
+console.log('--------------objects retrieved------------------' + retrievedObject);
+
  //constructor
 function addItem(imgName,idNumber) {
   this.imgName = imgName;
@@ -25,15 +30,8 @@ function addItem(imgName,idNumber) {
 
 }
 
-//after click hide the button
-// function block_none(){
-//   document.getElementById('startButton').classList.add('show');
-//   document.getElementById('startButton').classList.add('hide');
-// }
-
 //start clicking
 function start() {
-
   // var button = document.getElementById('startButton');
   // button.addEventListener('click',hideshow,false);
   // function hideshow() {
@@ -60,10 +58,14 @@ function getRandNum(min, max) {
 }
 
 //creating item objects
+// if (localStorage.itemObjects){
+//   localStorage.itemObjects = JSON.parse(itemObjects);
+// }else{
 for(var i = 0; i < imageNameArray.length; i++) {
   var newImage = imageNameArray[i];
   newImage = new addItem(newImage,i);
 }
+//}
 
 //get three random non matching numbers
 function threeNonMatching(){
@@ -86,46 +88,44 @@ function threeNonMatching(){
 
 //show three new items
 function genNewItems() {
+
+  //get three unique numbers
   threeNonMatching();
+
+  //select div to place items
   var divEl = document.getElementById('itemSpace');
-  // var liEl = document.createElement('li');
-  // liEl.id = 'firstPhotoLi';
+
+//creat img tags
   var imgEl = document.createElement('img');
   imgEl.setAttribute('src', itemObjects[first].filePath);
   imgEl.id = 'firstItemImg';
   itemObjects[first].timesViewed++;
   divEl.appendChild(imgEl);
-  //divEl.appendChild(liEl);
 
-  // var liEl = document.createElement('li');
-  // liEl.id = 'secondPhotoLi';
   var imgEl = document.createElement('img');
   imgEl.setAttribute('src', itemObjects[second].filePath);
   imgEl.id = 'secondItemImg';
   itemObjects[second].timesViewed++;
   divEl.appendChild(imgEl);
-  //divEl.appendChild(liEl);
 
-  // var liEl = document.createElement('li');
-  // liEl.id = 'thridPhotoLi';
   var imgEl = document.createElement('img');
   imgEl.setAttribute('src', itemObjects[third].filePath);
   imgEl.id = 'thirdItemImg';
   itemObjects[third].timesViewed++;
   divEl.appendChild(imgEl);
-  //divEl.appendChild(liEl);
 
   clickCounter ++;
   var clickCounterEl = document.getElementById('runningTotal');
   clickCounterEl.textContent = clickCounter;
-//variables for charts
-  var labelNameChartOne = [];
-  var dataChartOne = [];
-  var labelNameChartTwo = [];
-  var dataChartTwo = [];
+
+// //variables for charts
+//   var labelNameChartOne = [];
+//   var dataChartOne = [];
+//   var labelNameChartTwo = [];
+//   var dataChartTwo = [];
 
   if(clickCounter > chances) {
-    itemSpace.removeEventListener('click', showMorePhotos);
+    itemSpace.removeEventListener('click', showMoreItems);
 
     var tbEl = document.getElementById('tableResults');
     divEl.className = 'hidden';
@@ -133,12 +133,14 @@ function genNewItems() {
     var thEl = document.createElement('th');
     thEl.textContent = 'Image Name';
     trEl.appendChild(thEl);
+
     var thEl = document.createElement('th');
     thEl.textContent = 'Times Viewed';
     trEl.appendChild(thEl);
     var thEl = document.createElement('th');
     thEl.textContent = 'Times Clicked';
     trEl.appendChild(thEl);
+
     var thEl = document.createElement('th');
     thEl.textContent = 'Click Thru Rate';
     trEl.appendChild(thEl);
@@ -147,113 +149,133 @@ function genNewItems() {
     for(var ii = 0; ii < itemObjects.length; ii++){
       var trEl = document.createElement('tr');
       var tdEl = document.createElement('td');
-      dataChartOne.push(itemObjects[ii].timesClicked);
 
+      //dataChartOne.push(itemObjects[ii].timesClicked);
       tdEl.textContent = itemObjects[ii].imgName;
-      labelNameChartOne.push(itemObjects[ii].imgName);
-      labelNameChartTwo.push(itemObjects[ii].imgName);
+      //labelNameChartOne.push(itemObjects[ii].imgName);
+      //labelNameChartTwo.push(itemObjects[ii].imgName);
       trEl.appendChild(tdEl);
+
       var tdEl = document.createElement('td');
       tdEl.textContent = itemObjects[ii].timesViewed;
       trEl.appendChild(tdEl);
+
       var tdEl = document.createElement('td');
       tdEl.textContent = itemObjects[ii].timesClicked;
       trEl.appendChild(tdEl);
+
       var tdEl = document.createElement('td');
-      var perc = Math.floor(((itemObjects[ii].timesClicked / itemObjects[ii].timesViewed) * 100));
-      tdEl.textContent = perc;
-      dataChartTwo.push(perc);
+      itemObjects[ii].perc = Math.floor(((itemObjects[ii].timesClicked / itemObjects[ii].timesViewed) * 100));
+
+      tdEl.textContent = itemObjects[ii].perc;
+      //dataChartTwo.push(perc);
       trEl.appendChild(tdEl);
       tbEl.appendChild(trEl);
 
-      console.log(dataChartTwo);
+      // console.log(dataChartTwo);
     }
-    //chart
-    var context = document.getElementById('itemsPicked').getContext('2d');
-
-    var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'Artichoke', 'Amaranth Pink'];
-
-    var chartData = {
-      type: 'bar',
-      data: {
-        labels: labelNameChartOne,
-        datasets: [{
-          label: 'Items Selected',
-          data: dataChartOne,
-          backgroundColor: labelColors
-        }],
-      },
-
-      options: {
-        scales: {
-          yAxes:[{
-            ticks: {
-              beginAtZero: true,
-              maintainAspectRatio: false,
-            }
-          }]
-        }
-      }
-    };
-    var myChart = new Chart(context, chartData);
-
-    //chart 2
-    var context = document.getElementById('mostPicked').getContext('2d');
-
-    var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'teal', 'red', 'orange', 'indigo', 'yellow', 'tomato', 'Artichoke', 'Amaranth Pink'];
-
-    var chartDataTwo = {
-      type: 'polarArea',
-      data: {
-        labels: labelNameChartTwo,
-        datasets: [{
-          label: 'Most Selected',
-          data: dataChartTwo,
-          backgroundColor: labelColors
-        }],
-      },
-
-      options: {
-        scales: {
-          yAxes:[{
-            ticks: {
-              beginAtZero: true,
-              maintainAspectRatio: false,
-            }
-          }]
-        }
-      }
-    };
-    var myChartTwo = new Chart(context, chartDataTwo);
-
+    seecharts.className = '';
+    // //charts
+    // var context = document.getElementById('itemsPicked').getContext('2d');
+    //
+    // var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'darkolivegreen', 'Beige ', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'teal', 'red', 'orange', 'indigo', 'yellow', 'chocolate', 'crimson', 'brown',];
+    //
+    // var chartData = {
+    //   type: 'bar',
+    //   data: {
+    //     labels: labelNameChartOne,
+    //     datasets: [{
+    //       label: 'Items Selected',
+    //       data: dataChartOne,
+    //       backgroundColor: labelColors
+    //     }],
+    //   },
+    //
+    //   options: {
+    //     scales: {
+    //       yAxes:[{
+    //         ticks: {
+    //           beginAtZero: true,
+    //           maintainAspectRatio: false,
+    //         }
+    //       }]
+    //     }
+    //   }
+    // };
+    //
+    // var myChart = new Chart(context, chartData);
+    // document.getElementById('chartOne', 'chartTwo');
+    // chartOne.className = 'show';
+    // chartTwo.className = 'show';
+    //
+    // //chart 2
+    // var context = document.getElementById('mostPicked').getContext('2d');
+    //
+    // var chartDataTwo = {
+    //   type: 'polarArea',
+    //   data: {
+    //     labels: labelNameChartTwo,
+    //     datasets: [{
+    //       label: 'Most Selected',
+    //       data: dataChartTwo,
+    //       backgroundColor: labelColors
+    //     }],
+    //   },
+    //
+    //   options: {
+    //     scales: {
+    //       yAxes:[{
+    //         ticks: {
+    //           beginAtZero: true,
+    //           maintainAspectRatio: false,
+    //         }
+    //       }]
+    //     }
+    //   }
+    // };
+    //
+    // //chartData.options.scales.yAxes[0].ticks.beginAtZero = true;
+    // var myChartTwo = new Chart(context, chartDataTwo);
+    //localStorage.setItem('itemObjects', stored);
+    //localStorage.setItem('itemObjects', JSON.stringify(stored));
+    // var result = localStorage.getItem('itemObjects');
+    saveToLocalStorage(itemObjects);
   }
 }
 
 //checking items to show new ones
-function checkPhoto(arrayObj) {
+function checkItem(arrayObj) {
   arrayObj.timesClicked++;
+
   var divEl = document.getElementById('itemSpace');
   divEl.innerHTML = '';
   genNewItems();
 };
 
 //show three new items
-function showMorePhotos(event) {
+function showMoreItems(event) {
   if (event.target.id === 'firstItemImg') {
-    checkPhoto(itemObjects[first]);
+    checkItem(itemObjects[first]);
   }
   if (event.target.id === 'secondItemImg') {
-    checkPhoto(itemObjects[second]);
+    checkItem(itemObjects[second]);
   }
   if (event.target.id === 'thirdItemImg') {
-    checkPhoto(itemObjects[third]);
+    checkItem(itemObjects[third]);
   }
 };
 
-//waiting untill click on item
-itemSpace.addEventListener('click', showMorePhotos);
+function saveToLocalStorage(itemObjects){
+  //var retrievedObject = //localStorage.getItem('itemObjects');
+  //var stored = JSON.parse(retrievedObject);
+  //var stored = JSON.stringify(itemObjects);
+  localStorage.setItem('itemObjects', retrievedObject);
+  localStorage.itemObjects = JSON.stringify(itemObjects);
 
-//chartData.options.scales.yAxes[0].ticks.beginAtZero = true;
+  console.log('Saved to localStorage');
+}
+//waiting untill click on item
+itemSpace.addEventListener('click', showMoreItems);
 
 //product constructor
   //% of times item was clicked when shown
