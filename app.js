@@ -13,9 +13,10 @@ var second = 0;
 var third = 0;
 var perc = [];
 
-var retrievedObject = localStorage.getItem('itemObjects');
-var stored = /*JSON.parse*/(retrievedObject);
-console.log('--------------objects retrieved------------------' + retrievedObject);
+//var stored = JSON.parse(localStorage.itemObjects);
+//localStorage.itemObjects = JSON.parse(itemObjects);
+
+//console.log('--------------objects retrieved------------', localStorage);
 
  //constructor
 function AddItem(imgName,idNumber) {
@@ -61,9 +62,16 @@ function getRandNum(min, max) {
 // if (localStorage.itemObjects){
 //   localStorage.itemObjects = JSON.parse(itemObjects);
 // }else{
-for(var i = 0; i < imageNameArray.length; i++) {
-  var newImage = imageNameArray[i];
-  newImage = new AddItem(newImage,i);
+
+/*------------if no localStorage run AddItem----------*/
+/*----else add to localStorage to add more clicks------*/
+if(typeof(localStorage.itemObjects) === 'undefined'){
+  for(var i = 0; i < imageNameArray.length; i++) {
+    var newImage = imageNameArray[i];
+    newImage = new AddItem(newImage,i);
+  }
+} else {
+  var itemObjects = JSON.parse(localStorage.itemObjects);
 }
 //}
 
@@ -269,10 +277,10 @@ function saveToLocalStorage(itemObjects){
   //var retrievedObject = //localStorage.getItem('itemObjects');
   //var stored = JSON.parse(retrievedObject);
   //var stored = JSON.stringify(itemObjects);
-  localStorage.setItem('itemObjects', 'retrievedObject');
+
   localStorage.itemObjects = JSON.stringify(itemObjects);
 
-  console.log('Saved to localStorage');
+  console.log('Saved; ', localStorage, 'to localStorage');
 }
 //waiting untill click on item
 itemSpace.addEventListener('click', showMoreItems);
