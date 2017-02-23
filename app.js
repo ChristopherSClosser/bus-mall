@@ -14,11 +14,11 @@ var third = 0;
 var perc = [];
 
 var retrievedObject = localStorage.getItem('itemObjects');
-//var stored = JSON.parse(retrievedObject);
+var stored = /*JSON.parse*/(retrievedObject);
 console.log('--------------objects retrieved------------------' + retrievedObject);
 
  //constructor
-function addItem(imgName,idNumber) {
+function AddItem(imgName,idNumber) {
   this.imgName = imgName;
   this.idNumber = idNumber;
   this.filePath = 'assets/' + imgName + '.jpg';
@@ -63,7 +63,7 @@ function getRandNum(min, max) {
 // }else{
 for(var i = 0; i < imageNameArray.length; i++) {
   var newImage = imageNameArray[i];
-  newImage = new addItem(newImage,i);
+  newImage = new AddItem(newImage,i);
 }
 //}
 
@@ -269,7 +269,7 @@ function saveToLocalStorage(itemObjects){
   //var retrievedObject = //localStorage.getItem('itemObjects');
   //var stored = JSON.parse(retrievedObject);
   //var stored = JSON.stringify(itemObjects);
-  localStorage.setItem('itemObjects', retrievedObject);
+  localStorage.setItem('itemObjects', 'retrievedObject');
   localStorage.itemObjects = JSON.stringify(itemObjects);
 
   console.log('Saved to localStorage');
