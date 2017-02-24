@@ -74,7 +74,6 @@ if(typeof(localStorage.itemObjects) === 'undefined'){
   var itemObjects = JSON.parse(localStorage.itemObjects);
 }
 //}
-
 //get three random non matching numbers
 function threeNonMatching(){
   first = getRandNum(0,(itemObjects.length - 1));
