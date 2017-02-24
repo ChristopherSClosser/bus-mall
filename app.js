@@ -133,10 +133,11 @@ function genNewItems() {
 //   var dataChartTwo = [];
 
   if(clickCounter > chances) {
+    counter.className = 'hidden';
     itemSpace.removeEventListener('click', showMoreItems);
 
     var tbEl = document.getElementById('tableResults');
-    divEl.className = 'hidden';
+    //divEl.className = 'hidden';
     var trEl = document.createElement('tr');
     var thEl = document.createElement('th');
     thEl.textContent = 'Image Name';
@@ -284,6 +285,8 @@ function saveToLocalStorage(itemObjects){
 }
 //waiting untill click on item
 itemSpace.addEventListener('click', showMoreItems);
+
+//STRETCH TRY TO COMPARE ONE ITEM AGAINST ANOTHER!!!!!
 
 //product constructor
   //% of times item was clicked when shown
