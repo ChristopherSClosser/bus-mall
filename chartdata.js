@@ -48,7 +48,7 @@ var nameData = itemObjectsNames(itemObjects);
 var percData = itemObjectsPerc(itemObjects);
 console.log(percData);
 var data = [13,2,90,67,4,34,1,0,56,45,72,98,29,57,83,8, 87, 59, 93, 55];
-var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'darkolivegreen', 'goldenrod', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'olivedrab', 'red', 'orange', 'indigo', 'yellow', 'chocolate', 'crimson', 'brown',];
+var labelColors = ['tan', 'blue', 'teal', 'red', 'orange', 'darkolivegreen', 'goldenrod', 'tomato', 'green', 'salmon', 'black', 'yellowgreen', 'olivedrab', 'chartreuse', 'orange', 'indigo', 'yellow', 'chocolate', 'crimson', 'brown',];
 
 var chartData = {
   type: 'bar',
